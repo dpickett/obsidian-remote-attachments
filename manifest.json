@@ -1,11 +1,11 @@
 {
-	"id": "obsidian-remote-attachments",
-	"name": "Obsidian Remote Attachments",
-	"version": "0.1.0",
-	"minAppVersion": "0.15.0",
-	"description": "Remotely save attachments to cloud services (Amazon S3)",
-	"author": "Dan Pickett",
-	"authorUrl": "https://danpickett.com",
-	"fundingUrl": "https://danpickett.com",
-	"isDesktopOnly": false
+  "id": "obsidian-remote-attachments",
+  "name": "Obsidian Remote Attachments",
+  "version": "0.1.0",
+  "minAppVersion": "0.15.0",
+  "description": "Remotely save attachments to cloud services (Amazon S3)",
+  "author": "Dan Pickett",
+  "authorUrl": "https://danpickett.com",
+  "fundingUrl": "https://danpickett.com",
+  "isDesktopOnly": false
 }
