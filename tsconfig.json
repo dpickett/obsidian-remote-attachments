@@ -1,18 +1,30 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "baseUrl": ".",
+    "importHelpers": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "module": "ESNext",
-    "target": "ES6",
-    "allowJs": true,
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
     "isolatedModules": true,
+    "lib": [
+      "DOM",
+      "ES5",
+      "ES6",
+      "ES7"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
     "strictNullChecks": true,
-    "lib": ["DOM", "ES5", "ES6", "ES7"]
+    "target": "ES6",
+    "types": [
+      "jest"
+    ]
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "**/*.ts"
+  ]
 }

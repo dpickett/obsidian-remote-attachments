@@ -1,19 +1,11 @@
+import { S3SettingDefaults, S3SettingsParams } from "./aws/S3Settings";
+
 export interface PluginSettings {
   remoteAdapter: "aws";
-  aws: {
-    bucketName: string;
-    accessKey: string;
-    secretAccessKey: string;
-    region: string;
-  };
+  aws: S3SettingsParams;
 }
 
 export const defaultSettings: PluginSettings = {
   remoteAdapter: "aws",
-  aws: {
-    bucketName: "",
-    accessKey: "",
-    secretAccessKey: "",
-    region: "",
-  },
+  aws: S3SettingDefaults,
 };
