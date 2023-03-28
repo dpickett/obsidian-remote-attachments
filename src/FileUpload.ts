@@ -1,8 +1,10 @@
+import { getSignedUrl } from "./aws/getSignedUrl";
 import { uploadToS3 } from "./aws/uploadToS3";
 import { makeUniqueFileName } from "./makeUniqueFileName";
 import { PluginSettings } from "./PluginSettings";
 import { UploadFailedError } from "./UploadFailedError";
 
+const signatureExpirationTtlSeconds = 60;
 export class FileUpload {
   private file: File;
   private settings: PluginSettings;
@@ -13,8 +15,15 @@ export class FileUpload {
   }
 
   async transmit() {
-    await uploadToS3(this.file, makeUniqueFileName(this.file.name), this.settings.aws)
-      .then((value) => {})
+    const fileName = makeUniqueFileName(this.file.name);
+    return await uploadToS3(this.file, fileName, this.settings.aws)
+      .then(() => {
+        return getSignedUrl({
+          key: fileName,
+          settings: this.settings.aws,
+          ttlSeconds: signatureExpirationTtlSeconds,
+        });
+      })
       .catch((error: Error) => {
         throw new UploadFailedError(error.message);
       });

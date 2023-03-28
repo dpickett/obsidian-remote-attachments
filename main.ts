@@ -46,7 +46,15 @@ export default class RemoteAttachmentPlugin extends Plugin {
     if (file) {
       event.preventDefault();
       const fileUpload = new FileUpload(file, this.settings);
-      fileUpload.transmit();
+      fileUpload
+        .transmit()
+        .then((url) => {
+          console.log(url);
+        })
+        .catch((error: Error) => {
+          new Notice(`Failed to upload to S3: ${error.message}`);
+          console.error(error);
+        });
     }
   }
 }
