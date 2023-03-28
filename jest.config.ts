@@ -1,17 +1,10 @@
-import type { InitialOptionsTsJest } from "ts-jest/dist/types";
-
-const config: InitialOptionsTsJest = {
+const config = {
   clearMocks: true,
   modulePathIgnorePatterns: ["dist"],
   preset: "ts-jest",
   testEnvironment: "node",
-  globals: {
-    "ts-jest": {
-      useESM: true,
-    },
-  },
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.tsx?$": ["ts-jest", { useEsm: true }],
   },
 };
 
