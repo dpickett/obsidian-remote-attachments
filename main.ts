@@ -1,4 +1,4 @@
-import { Notice, Plugin } from "obsidian";
+import { Editor, MarkdownView, Notice, Plugin } from "obsidian";
 import { S3Settings } from "src/aws/S3Settings";
 import { FileUpload } from "src/FileUpload";
 import { defaultSettings, PluginSettings } from "src/PluginSettings";
@@ -41,7 +41,7 @@ export default class RemoteAttachmentPlugin extends Plugin {
     await this.saveData(this.settings);
   }
 
-  private handleFileEvent(event: ClipboardEvent) {
+  private handleFileEvent(event: ClipboardEvent, _: Editor, markdownView: MarkdownView) {
     const file = event.clipboardData?.files[0];
     if (file) {
       event.preventDefault();
@@ -49,7 +49,7 @@ export default class RemoteAttachmentPlugin extends Plugin {
       fileUpload
         .transmit()
         .then((url) => {
-          console.log(url);
+          markdownView.editor.replaceSelection(`![](${url})`);
         })
         .catch((error: Error) => {
           new Notice(`Failed to upload to S3: ${error.message}`);
