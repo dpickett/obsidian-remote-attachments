@@ -42,6 +42,7 @@ export default class RemoteAttachmentPlugin extends Plugin {
   }
 
   private handleFileEvent(event: ClipboardEvent, _: Editor, markdownView: MarkdownView) {
+    const insertionPoint = markdownView.editor.getCursor()
     const file = event.clipboardData?.files[0];
     if (file) {
       event.preventDefault();
@@ -49,7 +50,7 @@ export default class RemoteAttachmentPlugin extends Plugin {
       fileUpload
         .transmit()
         .then((url) => {
-          markdownView.editor.replaceSelection(`![](${url})`);
+          markdownView.editor.replaceRange(`![](${url})`, insertionPoint);
         })
         .catch((error: Error) => {
           new Notice(`Failed to upload to S3: ${error.message}`);
